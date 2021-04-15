@@ -61,42 +61,51 @@ class Board {
                 },
             }
         });
-        MRE.Actor.Create(this.context, {
-            actor: {
-                parentId: blackBoard.id,
-                transform: { local: { position: { x: -1.6, y: 2.65, z: -0.05 } } },
-                text: {
-                    contents: "2",
-                    height: 0.3,
-                    anchor: MRE.TextAnchorLocation.TopLeft
+        /*MRE.Actor.Create(this.context,{
+            actor:{
+                parentId:blackBoard.id,
+                transform:{local:{position:{x:-1.6,y:2.65,z:-0.05}}},
+                text:{
+                    contents:"2",
+                    height:0.3,
+                    anchor:MRE.TextAnchorLocation.TopLeft
                 }
-            }
-        });
-        const blackBoard2 = MRE.Actor.CreateFromPrefab(this.context, {
+            }----------------------------------------------
+        });*/
+        /*const blackBoard2 = MRE.Actor.CreateFromPrefab(this.context, {
             firstPrefabFrom: boardPrefab,
             //addCollider: true,
             actor: {
                 parentId: this.localSpace.id,
                 transform: { local: {
-                        position: { x: -4, y: 0, z: 0 },
-                        scale: { x: 1.25, y: 1.25, z: 1.25 }
-                    } },
+                    position: { x: -4, y: 0, z: 0 } ,
+                    scale:{x:1.25,y:1.25,z:1.25}
+                } },
                 appearance: {
                     materialId: greenMaterial.id,
                 },
-            }
-        });
-        MRE.Actor.Create(this.context, {
-            actor: {
-                parentId: blackBoard2.id,
-                transform: { local: { position: { x: -1.6, y: 2.65, z: -0.05 } } },
-                text: {
-                    contents: "1",
-                    height: 0.3,
-                    anchor: MRE.TextAnchorLocation.TopLeft
-                }
-            }
-        });
+                /*collider:{
+                    geometry:{
+                        shape:MRE.ColliderType.Box,
+                        size:{x:3,y:2,z:0.001},
+                        center:{x:0,y:0,z:-0.1}
+                    },
+                    layer:MRE.CollisionLayer.Navigation
+                }*/ /*----------------------------------------------
+    }
+});
+
+MRE.Actor.Create(this.context,{
+    actor:{
+        parentId:blackBoard2.id,
+        transform:{local:{position:{x:-1.6,y:2.65,z:-0.05}}},
+        text:{
+            contents:"1",
+            height:0.3,
+            anchor:MRE.TextAnchorLocation.TopLeft
+        }
+    }
+});*/
         MRE.Actor.Create(this.context, {
             actor: {
                 parentId: blackBoard.id,
@@ -110,7 +119,7 @@ class Board {
                 }
             }
         });
-        MRE.Actor.Create(this.context, {
+        /*MRE.Actor.Create(this.context, {
             actor: {
                 parentId: blackBoard2.id,
                 collider: {
@@ -121,8 +130,8 @@ class Board {
                     },
                     layer: MRE.CollisionLayer.Navigation
                 }
-            }
-        });
+            }---------------------------------------------------------------
+        });*/
         //blackBoard.collider.layer = MRE.CollisionLayer.Navigation;
         this.createLabel2("angry", this.labelSpawnPlace);
         this.createLabel2("mad", this.labelSpawnPlace);
@@ -168,6 +177,7 @@ class Board {
             }
         });
         label.onGrab("end", () => {
+            let falsy = false;
             //console.log(label.transform.app.position.y);
             if (label.transform.app.position.y < 3.36 && label.transform.app.position.y > 0.86 &&
                 label.transform.app.position.x > -0.07 && label.transform.app.position.x < 3.9 &&
@@ -190,7 +200,8 @@ class Board {
                     //this.door.openDoor();
                 }
             }
-            else if (label.transform.app.position.y < 3.36 && label.transform.app.position.y > 0.86 &&
+            else if (falsy && //just to make just one board-----------------------------------------
+                label.transform.app.position.y < 3.36 && label.transform.app.position.y > 0.86 &&
                 label.transform.app.position.x > -6 && label.transform.app.position.x < -2 &&
                 label.transform.app.position.z > -0.8 && label.transform.app.position.z < 0.15) {
                 label.enableRigidBody({ isKinematic: true });

@@ -63,7 +63,7 @@ export default class Board {
 				}*/
 			}
 		});
-		MRE.Actor.Create(this.context,{
+		/*MRE.Actor.Create(this.context,{
 			actor:{
 				parentId:blackBoard.id,
 				transform:{local:{position:{x:-1.6,y:2.65,z:-0.05}}},
@@ -72,10 +72,10 @@ export default class Board {
 					height:0.3,
 					anchor:MRE.TextAnchorLocation.TopLeft
 				}
-			}
-		});
+			}----------------------------------------------
+		});*/
 
-		const blackBoard2 = MRE.Actor.CreateFromPrefab(this.context, {
+		/*const blackBoard2 = MRE.Actor.CreateFromPrefab(this.context, {
 			firstPrefabFrom: boardPrefab,
 			//addCollider: true,
 			actor: {
@@ -94,7 +94,7 @@ export default class Board {
 						center:{x:0,y:0,z:-0.1}
 					},
 					layer:MRE.CollisionLayer.Navigation
-				}*/
+				}*//*----------------------------------------------
 			}
 		});
 
@@ -108,7 +108,7 @@ export default class Board {
 					anchor:MRE.TextAnchorLocation.TopLeft
 				}
 			}
-		});
+		});*/
 
 		MRE.Actor.Create(this.context, {
 			actor: {
@@ -124,7 +124,7 @@ export default class Board {
 			}
 		});
 
-		MRE.Actor.Create(this.context, {
+		/*MRE.Actor.Create(this.context, {
 			actor: {
 				parentId: blackBoard2.id,
 				collider: {
@@ -135,8 +135,8 @@ export default class Board {
 					},
 					layer: MRE.CollisionLayer.Navigation
 				}
-			}
-		});
+			}---------------------------------------------------------------
+		});*/
 		//blackBoard.collider.layer = MRE.CollisionLayer.Navigation;
 
 		this.createLabel2("angry", this.labelSpawnPlace);
@@ -186,6 +186,7 @@ export default class Board {
 			}
 		})
 		label.onGrab("end", () => {
+			let falsy = false;
 			//console.log(label.transform.app.position.y);
 			if (label.transform.app.position.y < 3.36 && label.transform.app.position.y > 0.86 &&
 				label.transform.app.position.x > -0.07 && label.transform.app.position.x < 3.9 &&
@@ -207,7 +208,7 @@ export default class Board {
 				if (this.totalOnBoard1 >= 6 && this.totalOnBoard2 >= 6) {
 					//this.door.openDoor();
 				}
-			} else if (
+			} else if (falsy && //just to make just one board-----------------------------------------
 				label.transform.app.position.y < 3.36 && label.transform.app.position.y > 0.86 &&
 				label.transform.app.position.x > -6 && label.transform.app.position.x < -2 &&
 				label.transform.app.position.z > -0.8 && label.transform.app.position.z < 0.15) {
