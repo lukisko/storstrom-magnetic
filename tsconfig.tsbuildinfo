@@ -1182,7 +1182,7 @@
         "affectsGlobalScope": false
       },
       "./src/interactiveboard.ts": {
-        "version": "3bd7c3325aead9289e0237e9a85bdc73e84d88aa2b5014e2a0952407cc077e36",
+        "version": "d85892815cf703c8b7df366c1a5cdb66ef1556582dde5b972bf6f023478e3c7d",
         "signature": "f2061b896d125ce375125981a856d1eec0d0f1bbee19104a30604f1fd29e6e48",
         "affectsGlobalScope": false
       },

@@ -293,7 +293,7 @@ MRE.Actor.Create(this.context,{
         const addButton = this.buttonPlus.setBehavior(MRE.ButtonBehavior);
         const lettersForRow = 15;
         addButton.onClick((user) => {
-            user.prompt("What word on label do you want?", true)
+            user.prompt("Enter your word", true)
                 .then((value) => {
                 if (value.submitted) {
                     if (value.text.length < lettersForRow) { //I need to check if the input will fit into the label
