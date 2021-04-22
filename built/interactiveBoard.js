@@ -142,6 +142,14 @@ MRE.Actor.Create(this.context,{
         this.spawnLabel({ x: 5.2, y: 0.85, z: 0 });
         //this.door = new openingDoor(this.context, this.assets, { x: 5.828, y: 0, z: -6.24 });
         //this.door.openDoor();
+        //RCP calls
+        //this.context.rpc.on("test",(value)=>{
+        //	this.createLabel2("wow",{x:0,y:3,z:-1});
+        //	//console.log(value.userId);
+        //});
+        //this.context.rpc.receive("test", newGuid());
+        //const some = 
+        //const ws = new WebSocket("aha","localhost:8864");
     }
     createLabel2(name, position, height = 0.1) {
         const label = MRE.Actor.CreatePrimitive(this.assets, {
@@ -176,7 +184,7 @@ MRE.Actor.Create(this.context,{
                 label.tag = "";
             }
         });
-        label.onGrab("end", () => {
+        label.onGrab("end", (user) => {
             let falsy = false;
             //console.log(label.transform.app.position.y);
             if (label.transform.app.position.y < 3.36 && label.transform.app.position.y > 0.86 &&
@@ -220,6 +228,7 @@ MRE.Actor.Create(this.context,{
                 this.totalOnBoard2++;
                 if (this.totalOnBoard2 >= 6 && this.totalOnBoard1 >= 6) {
                     //this.door.openDoor();
+                    this.context.rpc.receive("point", user.id);
                 }
             }
             else {
@@ -293,6 +302,12 @@ MRE.Actor.Create(this.context,{
         const addButton = this.buttonPlus.setBehavior(MRE.ButtonBehavior);
         const lettersForRow = 15;
         addButton.onClick((user) => {
+            //console.log(this.context.rpcChannels);
+            //this.context.rpc.send({
+            //	procName:"test",
+            //	channelName:"test",
+            //	userId:user.id
+            //});
             user.prompt("Enter your word", true)
                 .then((value) => {
                 if (value.submitted) {

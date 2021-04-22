@@ -1182,12 +1182,12 @@
         "affectsGlobalScope": false
       },
       "./src/interactiveboard.ts": {
-        "version": "d85892815cf703c8b7df366c1a5cdb66ef1556582dde5b972bf6f023478e3c7d",
-        "signature": "f2061b896d125ce375125981a856d1eec0d0f1bbee19104a30604f1fd29e6e48",
+        "version": "8a116266ae00ab55371f58a05ce941b36434f4ebcd79c457a42886ff23bafd14",
+        "signature": "b6068295a90d8e6f506f1eddfd7635f6908d99b3d6e6551028834932ac992980",
         "affectsGlobalScope": false
       },
       "./src/app.ts": {
-        "version": "8f395db8fef94a2c9b41b035d5ab238312c940a7238fb7561c8e9db3dbb84e12",
+        "version": "6d389aebc4587fba00e19fbd07ad7b00cc913d7831fee0525dc8f8bf7a2ea220",
         "signature": "a2871e230c7249d032fc4535ac907e542d6eb0d71ca42c219740bc2213ad167f",
         "affectsGlobalScope": false
       },
@@ -2057,7 +2057,8 @@
         "./src/interactiveboard.ts"
       ],
       "./src/interactiveboard.ts": [
-        "./node_modules/@microsoft/mixed-reality-extension-sdk/built/index.d.ts"
+        "./node_modules/@microsoft/mixed-reality-extension-sdk/built/index.d.ts",
+        "./node_modules/@microsoft/mixed-reality-extension-sdk/built/internal/index.d.ts"
       ],
       "./src/server.ts": [
         "./node_modules/@microsoft/mixed-reality-extension-sdk/built/index.d.ts",

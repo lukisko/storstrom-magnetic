@@ -1,4 +1,6 @@
 import * as MRE from '@microsoft/mixed-reality-extension-sdk';
+import { newGuid } from '@microsoft/mixed-reality-extension-sdk';
+import { WebSocket } from '@microsoft/mixed-reality-extension-sdk/built/internal';
 //import openingDoor from "./openingDoor";
 
 export default class Board {
@@ -150,10 +152,22 @@ export default class Board {
 		//this.door = new openingDoor(this.context, this.assets, { x: 5.828, y: 0, z: -6.24 });
 		//this.door.openDoor();
 
+		//RCP calls
+
+		//this.context.rpc.on("test",(value)=>{
+		//	this.createLabel2("wow",{x:0,y:3,z:-1});
+		//	//console.log(value.userId);
+		//});
+
+		//this.context.rpc.receive("test", newGuid());
+
+		//const some = 
+
+		//const ws = new WebSocket("aha","localhost:8864");
 	}
 
 
-	private createLabel2(name: string, position: MRE.Vector3Like, height = 0.1) {
+	public createLabel2(name: string, position: MRE.Vector3Like, height = 0.1) {
 		const label = MRE.Actor.CreatePrimitive(this.assets, {
 			definition: {
 				shape: MRE.PrimitiveShape.Box,
@@ -185,7 +199,7 @@ export default class Board {
 				label.tag = "";
 			}
 		})
-		label.onGrab("end", () => {
+		label.onGrab("end", (user) => {
 			let falsy = false;
 			//console.log(label.transform.app.position.y);
 			if (label.transform.app.position.y < 3.36 && label.transform.app.position.y > 0.86 &&
@@ -228,6 +242,7 @@ export default class Board {
 				this.totalOnBoard2++;
 				if (this.totalOnBoard2 >=6 && this.totalOnBoard1>=6) {
 					//this.door.openDoor();
+					this.context.rpc.receive("point", user.id);
 				}
 			} else {
 				label.enableRigidBody({ isKinematic: false });
@@ -303,6 +318,12 @@ export default class Board {
 		const lettersForRow = 15
 
 		addButton.onClick((user: MRE.User) => {
+			//console.log(this.context.rpcChannels);
+			//this.context.rpc.send({
+			//	procName:"test",
+			//	channelName:"test",
+			//	userId:user.id
+			//});
 			user.prompt("Enter your word", true)
 				.then((value) => {
 					if (value.submitted) {
@@ -314,8 +335,8 @@ export default class Board {
 					} else {
 						user.prompt('You need to press "OK" to add label.', false);
 					}
-				})
-		})
+				});
+		});
 	}
 
 	public addButton(){

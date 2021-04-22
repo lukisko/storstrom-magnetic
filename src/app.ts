@@ -52,7 +52,6 @@ export default class LearningWorld {
 		const choice = new MultipleChoice(this.context, this.assets,
 			{ x: 12, y: 1, z: 1 }, multipleChoiceProp);*/
 		this.board = new Board(this.context, this.assets, { x: 0, y: 0, z: 0 });
-
 	}
 
 	private started() {

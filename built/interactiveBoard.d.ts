@@ -11,7 +11,7 @@ export default class Board {
     private buttonPlus;
     constructor(context: MRE.Context, assets: MRE.AssetContainer, centerPosition: MRE.Vector3Like, centerRotation?: MRE.QuaternionLike);
     private createIt;
-    private createLabel2;
+    createLabel2(name: string, position: MRE.Vector3Like, height?: number): void;
     spawnLabel(position: MRE.Vector3Like): void;
     addButton(): void;
 }
