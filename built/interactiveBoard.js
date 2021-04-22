@@ -144,7 +144,7 @@ MRE.Actor.Create(this.context,{
         //this.door.openDoor();
         //RCP calls
         this.context.rpc.on("point", (value) => {
-            console.log("trigger");
+            //console.log("trigger");
             this.createLabel2("wow", { x: 0, y: 3, z: -1 });
             //console.log(value.userId);
         });
@@ -231,7 +231,7 @@ MRE.Actor.Create(this.context,{
                 if (this.totalOnBoard2 >= 2 || this.totalOnBoard1 >= 2) {
                     //this.door.openDoor();
                     this.context.rpc.receive("point", user.id);
-                    console.log("it is triggered");
+                    //console.log("it is triggered");
                 }
             }
             else {
@@ -305,7 +305,7 @@ MRE.Actor.Create(this.context,{
         const addButton = this.buttonPlus.setBehavior(MRE.ButtonBehavior);
         const lettersForRow = 15;
         addButton.onClick((user) => {
-            console.log(this.context.rpcChannels);
+            //console.log(this.context.rpcChannels);
             this.context.rpc.send({
                 procName: "point",
                 channelName: "point",
