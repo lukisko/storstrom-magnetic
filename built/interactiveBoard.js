@@ -226,7 +226,7 @@ MRE.Actor.Create(this.context,{
                 });
                 label.tag = "counted2";
                 this.totalOnBoard2++;
-                if (this.totalOnBoard2 >= 6 && this.totalOnBoard1 >= 6) {
+                if (this.totalOnBoard2 >= 6 || this.totalOnBoard1 >= 6) {
                     //this.door.openDoor();
                     this.context.rpc.receive("point", user.id);
                 }

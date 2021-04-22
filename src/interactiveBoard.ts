@@ -240,7 +240,7 @@ export default class Board {
 				});
 				label.tag = "counted2";
 				this.totalOnBoard2++;
-				if (this.totalOnBoard2 >=6 && this.totalOnBoard1>=6) {
+				if (this.totalOnBoard2 >=2 || this.totalOnBoard1>=2) {
 					//this.door.openDoor();
 					this.context.rpc.receive("point", user.id);
 				}
