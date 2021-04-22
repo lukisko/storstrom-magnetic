@@ -154,10 +154,11 @@ export default class Board {
 
 		//RCP calls
 
-		//this.context.rpc.on("test",(value)=>{
-		//	this.createLabel2("wow",{x:0,y:3,z:-1});
-		//	//console.log(value.userId);
-		//});
+		this.context.rpc.on("point",(value)=>{
+			console.log("trigger");
+			this.createLabel2("wow",{x:0,y:3,z:-1});
+			//console.log(value.userId);
+		});
 
 		//this.context.rpc.receive("test", newGuid());
 
@@ -201,6 +202,7 @@ export default class Board {
 		})
 		label.onGrab("end", (user) => {
 			let falsy = false;
+			this.context.rpc.receive("point", user.id);
 			//console.log(label.transform.app.position.y);
 			if (label.transform.app.position.y < 3.36 && label.transform.app.position.y > 0.86 &&
 				label.transform.app.position.x > -0.07 && label.transform.app.position.x < 3.9 &&
@@ -243,6 +245,7 @@ export default class Board {
 				if (this.totalOnBoard2 >=2 || this.totalOnBoard1>=2) {
 					//this.door.openDoor();
 					this.context.rpc.receive("point", user.id);
+					console.log("it is triggered");
 				}
 			} else {
 				label.enableRigidBody({ isKinematic: false });
@@ -318,12 +321,12 @@ export default class Board {
 		const lettersForRow = 15
 
 		addButton.onClick((user: MRE.User) => {
-			//console.log(this.context.rpcChannels);
-			//this.context.rpc.send({
-			//	procName:"test",
-			//	channelName:"test",
-			//	userId:user.id
-			//});
+			console.log(this.context.rpcChannels);
+			this.context.rpc.send({
+				procName:"point",
+				channelName:"point",
+				userId:user.id
+			});
 			user.prompt("Enter your word", true)
 				.then((value) => {
 					if (value.submitted) {
