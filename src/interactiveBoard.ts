@@ -156,7 +156,7 @@ export default class Board {
 
 		this.context.rpc.on("point",(value)=>{
 			//console.log("trigger");
-			this.createLabel2("wow",{x:0,y:3,z:-1});
+			//this.createLabel2("wow",{x:0,y:3,z:-1});
 			//console.log(value.userId);
 		});
 
@@ -324,7 +324,6 @@ export default class Board {
 			//console.log(this.context.rpcChannels);
 			this.context.rpc.send({
 				procName:"point",
-				channelName:"point",
 				userId:user.id
 			});
 			user.prompt("Enter your word", true)

@@ -145,7 +145,7 @@ MRE.Actor.Create(this.context,{
         //RCP calls
         this.context.rpc.on("point", (value) => {
             //console.log("trigger");
-            this.createLabel2("wow", { x: 0, y: 3, z: -1 });
+            //this.createLabel2("wow",{x:0,y:3,z:-1});
             //console.log(value.userId);
         });
         //this.context.rpc.receive("test", newGuid());
@@ -308,7 +308,6 @@ MRE.Actor.Create(this.context,{
             //console.log(this.context.rpcChannels);
             this.context.rpc.send({
                 procName: "point",
-                channelName: "point",
                 userId: user.id
             });
             user.prompt("Enter your word", true)
