@@ -62,6 +62,9 @@ class LearningWorld {
         const choice = new MultipleChoice(this.context, this.assets,
             { x: 12, y: 1, z: 1 }, multipleChoiceProp);*/
         this.board = new interactiveBoard_1.default(this.context, this.assets, { x: 0, y: 0, z: 0 });
+        this.context.onUserJoined((user) => {
+            this.board.userJoined(user);
+        });
     }
     started() {
         //console.log("everithing has started--------------");

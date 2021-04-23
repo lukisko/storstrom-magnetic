@@ -1,4 +1,4 @@
-	import * as MRE from '@microsoft/mixed-reality-extension-sdk';
+import * as MRE from '@microsoft/mixed-reality-extension-sdk';
 //import groupMask from './groupMask';
 import Board from './interactiveBoard';
 //import WearHat from "./wearHat";
@@ -25,7 +25,7 @@ export default class LearningWorld {
 		/*this.wearHat = new WearHat(this.context, this.assets,
 			{ x: 0, y: 0, z: -3 }, { x: 0, y: 0, z: 0, w: 1 }, this.usersTrack);*/
 		this.context.onStarted(() => {
-			
+
 			this.started();
 			//this.starSystem.start();
 		});
@@ -52,12 +52,17 @@ export default class LearningWorld {
 		const choice = new MultipleChoice(this.context, this.assets,
 			{ x: 12, y: 1, z: 1 }, multipleChoiceProp);*/
 		this.board = new Board(this.context, this.assets, { x: 0, y: 0, z: 0 });
+
+
+		this.context.onUserJoined((user) => {
+			this.board.userJoined(user);
+		});
 	}
 
 	private started() {
-		
+
 		//console.log("everithing has started--------------");
-		
+
 		/*const textureFromWeb = await this.assets.createTexture("web texture",{
 			uri:"https://upload.wikimedia.org/wikipedia/commons/3/31/Wiki_logo_Nupedia.jpg"
 		});
