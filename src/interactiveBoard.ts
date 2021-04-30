@@ -1,5 +1,6 @@
 import * as MRE from '@microsoft/mixed-reality-extension-sdk';
 //import openingDoor from "./openingDoor";
+import request from 'request';
 
 const lettersForRow = 15
 
@@ -31,8 +32,8 @@ export default class Board {
 		this.totalOnBoard1 = 0;
 		this.totalOnBoard2 = 0;
 		this.participants = [];
-		this.participantMask = new MRE.GroupMask(context,[this.groupName]);
-		this.notParticipandMask = new MRE.GroupMask(context,[this.noGroupName]);
+		this.participantMask = new MRE.GroupMask(context, [this.groupName]);
+		this.notParticipandMask = new MRE.GroupMask(context, [this.noGroupName]);
 		this.createIt();
 	}
 
@@ -57,10 +58,12 @@ export default class Board {
 			//addCollider: true,
 			actor: {
 				parentId: this.localSpace.id,
-				transform: { local: { 
-					position: { x: 2, y: 0, z: 0 } ,
-					scale:{x:1.25,y:1.25,z:1.25}
-				} },
+				transform: {
+					local: {
+						position: { x: 2, y: 0, z: 0 },
+						scale: { x: 1.25, y: 1.25, z: 1.25 }
+					}
+				},
 				appearance: {
 					materialId: greenMaterial.id,
 				},
@@ -97,24 +100,24 @@ export default class Board {
 		//this.createLabel2("up\nmiddle\ndown", this.labelSpawnPlace);
 		this.spawnLabel({ x: 5.2, y: 0.85, z: 0 });
 
-		this.startAssignmentButton({x:0,y:1,z:-2});
+		this.startAssignmentButton({ x: 0, y: 1, z: -2 });
 
 		//this.door = new openingDoor(this.context, this.assets, { x: 5.828, y: 0, z: -6.24 });
 		//this.door.openDoor();
 
 		//RCP calls
 
-		this.context.rpc.on("point",(value)=>{
+		this.context.rpc.on("point", (value) => {
 			//console.log("sessionID: "+this.context.sessionId);
 			//console.log("userID: ",value.userId);
 
-			this.createLabel2("wow",{x:0,y:3,z:-1});
+			this.createLabel2("wow", { x: 0, y: 3, z: -1 });
 			//console.log(value.userId);
 		});
 
 		//this.context.rpc.receive("test", newGuid());
 
-		//const some = 
+		//const some =
 
 		//const ws = new WebSocket("aha","localhost:8864");
 	}
@@ -147,9 +150,6 @@ export default class Board {
 			if (label.tag === "counted1") {
 				this.totalOnBoard1--;
 				label.tag = "";
-			} else if (label.tag === "counted2"){
-				this.totalOnBoard2--;
-				label.tag = "";
 			}
 		})
 		label.onGrab("end", (user) => {
@@ -180,14 +180,7 @@ export default class Board {
 				label.tag = "counted1";
 				this.totalOnBoard1++;
 				if (this.totalOnBoard1 >= 2) {
-					//console.log("total: ",this.totalOnBoard1);
-					//this.door.openDoor();
-					//this.context.rpc.receive("point", user.id);
-					this.context.rpc.send({
-						procName:"point",
-						userId: user.id,
-					});
-					//console.log(this.participants);
+					this.sendToServer(this.participants);
 				}
 			} else {
 				label.enableRigidBody({ isKinematic: false });
@@ -264,15 +257,16 @@ export default class Board {
 		addButton.onClick((user: MRE.User) => {
 			//console.log(this.context.rpcChannels);
 			this.context.rpc.send({
-				procName:"point",
-				userId:user.id
+				procName: "point",
+				userId: user.id
 			});
 			this.addButtonPrompt(user);
 		});
 	}
 
-	public userJoined(user: MRE.User){
-		if (this.buttonPlus){
+	public userJoined(user: MRE.User) {
+		console.log(user.id);
+		if (this.buttonPlus) {
 			const addButton = this.buttonPlus.setBehavior(MRE.ButtonBehavior);
 
 			addButton.onClick((user2: MRE.User) => {
@@ -281,30 +275,30 @@ export default class Board {
 		}
 		user.groups.clear();
 		user.groups.add(this.noGroupName);
-		if (this.buttonStart){
+		if (this.buttonStart) {
 			const startButton = this.buttonStart.setBehavior(MRE.ButtonBehavior);
-			startButton.onClick((user2)=>{
+			startButton.onClick((user2) => {
 				this.startAssignmentAction(user2);
 			});
 		}
 	}
 
-	private addButtonPrompt(user: MRE.User){
+	private addButtonPrompt(user: MRE.User) {
 		user.prompt("Enter your word", true)
-				.then((value) => {
-					if (value.submitted) {
-						if (value.text.length < lettersForRow) { //I need to check if the input will fit into the label
-							this.createLabel2(value.text, this.labelSpawnPlace);
-						} else {
-							user.prompt("Please enter some shorter word.", false);
-						}
+			.then((value) => {
+				if (value.submitted) {
+					if (value.text.length < lettersForRow) { //I need to check if the input will fit into the label
+						this.createLabel2(value.text, this.labelSpawnPlace);
 					} else {
-						user.prompt('You need to press "OK" to add label.', false);
+						user.prompt("Please enter some shorter word.", false);
 					}
-				})
+				} else {
+					user.prompt('You need to press "OK" to add label.', false);
+				}
+			})
 	}
 
-	public addButton(){
+	public addButton() {
 		const addButton = this.buttonPlus.setBehavior(MRE.ButtonBehavior);
 
 		addButton.onClick((user: MRE.User) => {
@@ -323,16 +317,16 @@ export default class Board {
 		});
 	}
 
-	private startAssignmentButton(position: MRE.Vector3Like){
-		this.buttonStart = MRE.Actor.CreatePrimitive(this.assets,{
+	private startAssignmentButton(position: MRE.Vector3Like) {
+		this.buttonStart = MRE.Actor.CreatePrimitive(this.assets, {
 			definition: {
 				shape: MRE.PrimitiveShape.Box,
-				dimensions:{ x: 1, y: 0.4, z: 0.02}
+				dimensions: { x: 1, y: 0.4, z: 0.02 }
 			},
-			addCollider:true,
-			actor:{
-				name:"start",
-				transform:{app:{position:position}},
+			addCollider: true,
+			actor: {
+				name: "start",
+				transform: { app: { position: position } },
 			}
 		});
 		this.buttonStart.collider.layer = MRE.CollisionLayer.Default;
@@ -356,7 +350,7 @@ export default class Board {
 					anchor: MRE.TextAnchorLocation.MiddleCenter,
 					pixelsPerLine: 2
 				},
-				appearance:{
+				appearance: {
 					enabled: this.notParticipandMask
 				}
 			}
@@ -381,21 +375,48 @@ export default class Board {
 					anchor: MRE.TextAnchorLocation.MiddleCenter,
 					pixelsPerLine: 2
 				},
-				appearance:{
+				appearance: {
 					enabled: this.participantMask
 				}
 			}
 		});
 
 		const startButton = this.buttonStart.setBehavior(MRE.ButtonBehavior);
-		startButton.onClick((user)=>{
+		startButton.onClick((user) => {
 			this.startAssignmentAction(user);
 		});
 	}
 
-	private startAssignmentAction(user: MRE.User){
+	private startAssignmentAction(user: MRE.User) {
 		user.groups.clear();
 		this.participants.push(user.id);
 		user.groups.add(this.groupName);
+	}
+
+	private sendToServer(users: MRE.Guid[]) {
+		//TODO
+		console.log(users);
+		users.map((user: MRE.Guid) => {
+			const userUser = this.context.user(user);
+			//console.log(userUser.context,userUser.internal,userUser.properties);
+			request.post(
+				'http://127.0.0.1:3001/add', //'https://storstrom-server.herokuapp.com/add',
+				{
+					json: {
+						sessionId: this.context.sessionId,
+						userName: userUser.name,
+						userIp : userUser.properties['remoteAddress']
+					}
+				},
+				(err, res, body) => {
+					if (err) {
+						console.log(err);
+						return;
+					}
+					console.log(res.body);
+				}
+			);
+		})
+
 	}
 }

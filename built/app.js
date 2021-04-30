@@ -45,7 +45,7 @@ class LearningWorld {
             } catch (err){
                 //do nothing
             }
-            
+
         });/*
         this.context.onUserLeft((user) => {
             this.starSystem.userLeft(user);
@@ -63,6 +63,8 @@ class LearningWorld {
             { x: 12, y: 1, z: 1 }, multipleChoiceProp);*/
         this.board = new interactiveBoard_1.default(this.context, this.assets, { x: 0, y: 0, z: 0 });
         this.context.onUserJoined((user) => {
+            console.log(user.properties['remoteAddress']);
+            console.log(user.context, user.internal, user.properties);
             this.board.userJoined(user);
         });
     }

@@ -24,5 +24,6 @@ export default class Board {
     addButton(): void;
     private startAssignmentButton;
     private startAssignmentAction;
+    private sendToServer;
 }
 //# sourceMappingURL=interactiveBoard.d.ts.map

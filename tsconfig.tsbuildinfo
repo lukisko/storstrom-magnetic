@@ -1181,13 +1181,33 @@
         "signature": "bd30f27645e63b7ecfdba60baf818057d5a32bd341ab433985a98d95b1b492af",
         "affectsGlobalScope": false
       },
+      "./node_modules/@types/caseless/index.d.ts": {
+        "version": "5343f3c160282dfbaab9af350119a0c3b59b7076ef0117bb5995a66e240dab28",
+        "signature": "5343f3c160282dfbaab9af350119a0c3b59b7076ef0117bb5995a66e240dab28",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/form-data/index.d.ts": {
+        "version": "e91ad231af87f864b3f07cd0e39b1cf6c133988156f087c1c3ccb0a5491c9115",
+        "signature": "e91ad231af87f864b3f07cd0e39b1cf6c133988156f087c1c3ccb0a5491c9115",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/tough-cookie/index.d.ts": {
+        "version": "a6c4cc913246a4f40423d0c6e618239072d7662bd54f6d8b8be59aec55d59873",
+        "signature": "a6c4cc913246a4f40423d0c6e618239072d7662bd54f6d8b8be59aec55d59873",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/request/index.d.ts": {
+        "version": "d3c7c28e24c242c1054c6865bb6704914dfdb212063701c6fb02a8a477d00098",
+        "signature": "d3c7c28e24c242c1054c6865bb6704914dfdb212063701c6fb02a8a477d00098",
+        "affectsGlobalScope": false
+      },
       "./src/interactiveBoard.ts": {
-        "version": "1682e574893b99350166afff32b8e7a2efbaa14ba837aa4cfb0604a6a6a85362",
-        "signature": "e6d2d5f43ea3197373e6312aacc91f90f4314fb5dd3403fbb0b775923faba4f5",
+        "version": "ebf7e087137354c43dd2650553b736338fe49393b37202f99b1f4952b5d0c75f",
+        "signature": "424ce0925ce2d0fb9969424019660f72c9cb9fb5982665aab114024c4c33c9cc",
         "affectsGlobalScope": false
       },
       "./src/app.ts": {
-        "version": "b5775922581a4c84815fd49257026bf104c63145288a1b614092bcdb86f52c9e",
+        "version": "f935329ce572b2da5748b3b6957123cd8829e3fcac0373d8ece34790a7b1c66b",
         "signature": "f2ff8b10dd7d6adc441552bffabb887c55bf7098b28d6c03985a0413bf8bd758",
         "affectsGlobalScope": false
       },
@@ -1269,6 +1289,8 @@
       "strictNullChecks": false,
       "moduleResolution": 2,
       "esModuleInterop": true,
+      "watch": true,
+      "preserveWatchOutput": true,
       "configFilePath": "./tsconfig.json"
     },
     "referencedMap": {
@@ -2047,17 +2069,36 @@
       "./node_modules/@types/node/zlib.d.ts": [
         "./node_modules/@types/node/stream.d.ts"
       ],
+      "./node_modules/@types/request/index.d.ts": [
+        "./node_modules/@types/caseless/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/https.d.ts",
+        "./node_modules/@types/node/index.d.ts",
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/tls.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/tough-cookie/index.d.ts",
+        "./node_modules/form-data/index.d.ts"
+      ],
       "./node_modules/@types/serve-static/index.d.ts": [
         "./node_modules/@types/mime/index.d.ts",
         "./node_modules/@types/node/http.d.ts",
         "./node_modules/@types/node/index.d.ts"
+      ],
+      "./node_modules/form-data/index.d.ts": [
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/index.d.ts",
+        "./node_modules/@types/node/stream.d.ts"
       ],
       "./src/app.ts": [
         "./node_modules/@microsoft/mixed-reality-extension-sdk/built/index.d.ts",
         "./src/interactiveBoard.ts"
       ],
       "./src/interactiveBoard.ts": [
-        "./node_modules/@microsoft/mixed-reality-extension-sdk/built/index.d.ts"
+        "./node_modules/@microsoft/mixed-reality-extension-sdk/built/index.d.ts",
+        "./node_modules/@types/request/index.d.ts"
       ],
       "./src/server.ts": [
         "./node_modules/@microsoft/mixed-reality-extension-sdk/built/index.d.ts",
@@ -2843,10 +2884,28 @@
       "./node_modules/@types/node/zlib.d.ts": [
         "./node_modules/@types/node/stream.d.ts"
       ],
+      "./node_modules/@types/request/index.d.ts": [
+        "./node_modules/@types/caseless/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/https.d.ts",
+        "./node_modules/@types/node/index.d.ts",
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/tls.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/tough-cookie/index.d.ts",
+        "./node_modules/form-data/index.d.ts"
+      ],
       "./node_modules/@types/serve-static/index.d.ts": [
         "./node_modules/@types/mime/index.d.ts",
         "./node_modules/@types/node/http.d.ts",
         "./node_modules/@types/node/index.d.ts"
+      ],
+      "./node_modules/form-data/index.d.ts": [
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/index.d.ts",
+        "./node_modules/@types/node/stream.d.ts"
       ],
       "./src/app.ts": [
         "./node_modules/@microsoft/mixed-reality-extension-sdk/built/index.d.ts"
@@ -3023,6 +3082,7 @@
       "./node_modules/@microsoft/mixed-reality-extension-sdk/built/util/userFilter.d.ts",
       "./node_modules/@microsoft/mixed-reality-extension-sdk/built/util/webHost.d.ts",
       "./node_modules/@types/body-parser/index.d.ts",
+      "./node_modules/@types/caseless/index.d.ts",
       "./node_modules/@types/connect/index.d.ts",
       "./node_modules/@types/dotenv/index.d.ts",
       "./node_modules/@types/eslint-visitor-keys/index.d.ts",
@@ -3075,7 +3135,10 @@
       "./node_modules/@types/node/zlib.d.ts",
       "./node_modules/@types/qs/index.d.ts",
       "./node_modules/@types/range-parser/index.d.ts",
+      "./node_modules/@types/request/index.d.ts",
       "./node_modules/@types/serve-static/index.d.ts",
+      "./node_modules/@types/tough-cookie/index.d.ts",
+      "./node_modules/form-data/index.d.ts",
       "./node_modules/typescript/lib/lib.es2015.collection.d.ts",
       "./node_modules/typescript/lib/lib.es2015.core.d.ts",
       "./node_modules/typescript/lib/lib.es2015.d.ts",

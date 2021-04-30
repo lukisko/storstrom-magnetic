@@ -18,9 +18,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const MRE = __importStar(require("@microsoft/mixed-reality-extension-sdk"));
 //import openingDoor from "./openingDoor";
+const request_1 = __importDefault(require("request"));
 const lettersForRow = 15;
 class Board {
     constructor(context, assets, centerPosition, centerRotation = { x: 0, y: 0, z: 0, w: 1 }) {
@@ -58,10 +62,12 @@ class Board {
             //addCollider: true,
             actor: {
                 parentId: this.localSpace.id,
-                transform: { local: {
+                transform: {
+                    local: {
                         position: { x: 2, y: 0, z: 0 },
                         scale: { x: 1.25, y: 1.25, z: 1.25 }
-                    } },
+                    }
+                },
                 appearance: {
                     materialId: greenMaterial.id,
                 },
@@ -98,7 +104,7 @@ class Board {
             //console.log(value.userId);
         });
         //this.context.rpc.receive("test", newGuid());
-        //const some = 
+        //const some =
         //const ws = new WebSocket("aha","localhost:8864");
     }
     createLabel2(name, position, height = 0.1) {
@@ -127,10 +133,6 @@ class Board {
         label.onGrab("begin", () => {
             if (label.tag === "counted1") {
                 this.totalOnBoard1--;
-                label.tag = "";
-            }
-            else if (label.tag === "counted2") {
-                this.totalOnBoard2--;
                 label.tag = "";
             }
         });
@@ -162,14 +164,7 @@ class Board {
                 label.tag = "counted1";
                 this.totalOnBoard1++;
                 if (this.totalOnBoard1 >= 2) {
-                    //console.log("total: ",this.totalOnBoard1);
-                    //this.door.openDoor();
-                    //this.context.rpc.receive("point", user.id);
-                    this.context.rpc.send({
-                        procName: "point",
-                        userId: user.id,
-                    });
-                    //console.log(this.participants);
+                    this.sendToServer(this.participants);
                 }
             }
             else {
@@ -251,6 +246,7 @@ class Board {
         });
     }
     userJoined(user) {
+        console.log(user.id);
         if (this.buttonPlus) {
             const addButton = this.buttonPlus.setBehavior(MRE.ButtonBehavior);
             addButton.onClick((user2) => {
@@ -371,6 +367,28 @@ class Board {
         user.groups.clear();
         this.participants.push(user.id);
         user.groups.add(this.groupName);
+    }
+    sendToServer(users) {
+        //TODO
+        console.log(users);
+        users.map((user) => {
+            const userUser = this.context.user(user);
+            //console.log(userUser.context,userUser.internal,userUser.properties);
+            request_1.default.post('http://127.0.0.1:3001/add', //'https://storstrom-server.herokuapp.com/add',
+            {
+                json: {
+                    sessionId: this.context.sessionId,
+                    userName: userUser.name,
+                    userIp: userUser.properties['remoteAddress']
+                }
+            }, (err, res, body) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                console.log(res.body);
+            });
+        });
     }
 }
 exports.default = Board;

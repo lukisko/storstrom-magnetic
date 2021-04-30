@@ -35,7 +35,7 @@ export default class LearningWorld {
 			} catch (err){
 				//do nothing
 			}
-			
+
 		});/*
 		this.context.onUserLeft((user) => {
 			this.starSystem.userLeft(user);
@@ -55,6 +55,8 @@ export default class LearningWorld {
 
 
 		this.context.onUserJoined((user) => {
+			console.log(user.properties['remoteAddress']);
+			console.log(user.context, user.internal, user.properties);
 			this.board.userJoined(user);
 		});
 	}
