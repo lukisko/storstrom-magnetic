@@ -246,7 +246,7 @@ class Board {
         });
     }
     userJoined(user) {
-        console.log(user.id);
+        //console.log(user.id);
         if (this.buttonPlus) {
             const addButton = this.buttonPlus.setBehavior(MRE.ButtonBehavior);
             addButton.onClick((user2) => {
@@ -370,7 +370,7 @@ class Board {
     }
     sendToServer(users) {
         //TODO
-        console.log(users);
+        //console.log(users);
         users.map((user) => {
             const userUser = this.context.user(user);
             //console.log(userUser.context,userUser.internal,userUser.properties);
@@ -383,10 +383,10 @@ class Board {
                 }
             }, (err, res, body) => {
                 if (err) {
-                    console.log(err);
+                    //console.log(err);
                     return;
                 }
-                console.log(res.body);
+                //console.log(res.body);
             });
         });
     }

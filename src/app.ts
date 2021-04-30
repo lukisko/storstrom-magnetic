@@ -55,8 +55,8 @@ export default class LearningWorld {
 
 
 		this.context.onUserJoined((user) => {
-			console.log(user.properties['remoteAddress']);
-			console.log(user.context, user.internal, user.properties);
+			//console.log(user.properties['remoteAddress']);
+			//console.log(user.context, user.internal, user.properties);
 			this.board.userJoined(user);
 		});
 	}

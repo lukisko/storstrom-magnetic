@@ -265,7 +265,7 @@ export default class Board {
 	}
 
 	public userJoined(user: MRE.User) {
-		console.log(user.id);
+		//console.log(user.id);
 		if (this.buttonPlus) {
 			const addButton = this.buttonPlus.setBehavior(MRE.ButtonBehavior);
 
@@ -395,7 +395,7 @@ export default class Board {
 
 	private sendToServer(users: MRE.Guid[]) {
 		//TODO
-		console.log(users);
+		//console.log(users);
 		users.map((user: MRE.Guid) => {
 			const userUser = this.context.user(user);
 			//console.log(userUser.context,userUser.internal,userUser.properties);
@@ -410,10 +410,10 @@ export default class Board {
 				},
 				(err, res, body) => {
 					if (err) {
-						console.log(err);
+						//console.log(err);
 						return;
 					}
-					console.log(res.body);
+					//console.log(res.body);
 				}
 			);
 		})
