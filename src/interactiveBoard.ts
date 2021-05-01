@@ -400,7 +400,7 @@ export default class Board {
 			const userUser = this.context.user(user);
 			//console.log(userUser.context,userUser.internal,userUser.properties);
 			request.post(
-				'http://127.0.0.1:3001/add', //'https://storstrom-server.herokuapp.com/add',
+				'https://storstrom-server.herokuapp.com/add',
 				{
 					json: {
 						sessionId: this.context.sessionId,

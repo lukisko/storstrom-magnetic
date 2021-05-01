@@ -374,8 +374,7 @@ class Board {
         users.map((user) => {
             const userUser = this.context.user(user);
             //console.log(userUser.context,userUser.internal,userUser.properties);
-            request_1.default.post('http://127.0.0.1:3001/add', //'https://storstrom-server.herokuapp.com/add',
-            {
+            request_1.default.post('https://storstrom-server.herokuapp.com/add', {
                 json: {
                     sessionId: this.context.sessionId,
                     userName: userUser.name,
