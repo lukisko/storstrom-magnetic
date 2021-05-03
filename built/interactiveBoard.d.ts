@@ -10,6 +10,7 @@ export default class Board {
     private participantMask;
     private notParticipandMask;
     private labelSpawnPlace;
+    private spaceID;
     private totalOnBoard1;
     private totalOnBoard2;
     private buttonPlus;

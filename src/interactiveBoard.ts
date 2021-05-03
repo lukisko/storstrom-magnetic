@@ -16,6 +16,7 @@ export default class Board {
 	private participantMask: MRE.GroupMask;
 	private notParticipandMask: MRE.GroupMask;
 	private labelSpawnPlace: MRE.Vector3Like = { x: 0, y: 1, z: -1 };
+	private spaceID: string;
 	//private door: openingDoor;
 	private totalOnBoard1: number;
 	private totalOnBoard2: number;
@@ -266,6 +267,9 @@ export default class Board {
 
 	public userJoined(user: MRE.User) {
 		//console.log(user.id);
+		if (!this.spaceID){
+			this.spaceID = user.properties['altspacevr-space-id'];
+		}
 		if (this.buttonPlus) {
 			const addButton = this.buttonPlus.setBehavior(MRE.ButtonBehavior);
 
@@ -396,6 +400,13 @@ export default class Board {
 	private sendToServer(users: MRE.Guid[]) {
 		//TODO
 		//console.log(users);
+		if (!this.spaceID){
+			try {
+				this.spaceID = this.context.users[0].properties['altspacevr-space-id'];
+			} catch {
+				return;
+			}
+		}
 		users.map((user: MRE.Guid) => {
 			const userUser = this.context.user(user);
 			//console.log(userUser.context,userUser.internal,userUser.properties);
@@ -403,7 +414,7 @@ export default class Board {
 				'https://storstrom-server.herokuapp.com/add',
 				{
 					json: {
-						sessionId: this.context.sessionId,
+						sessionId: this.spaceID,
 						userName: userUser.name,
 						userIp : userUser.properties['remoteAddress']
 					}

@@ -247,6 +247,9 @@ class Board {
     }
     userJoined(user) {
         //console.log(user.id);
+        if (!this.spaceID) {
+            this.spaceID = user.properties['altspacevr-space-id'];
+        }
         if (this.buttonPlus) {
             const addButton = this.buttonPlus.setBehavior(MRE.ButtonBehavior);
             addButton.onClick((user2) => {
@@ -371,12 +374,20 @@ class Board {
     sendToServer(users) {
         //TODO
         //console.log(users);
+        if (!this.spaceID) {
+            try {
+                this.spaceID = this.context.users[0].properties['altspacevr-space-id'];
+            }
+            catch (_a) {
+                return;
+            }
+        }
         users.map((user) => {
             const userUser = this.context.user(user);
             //console.log(userUser.context,userUser.internal,userUser.properties);
             request_1.default.post('https://storstrom-server.herokuapp.com/add', {
                 json: {
-                    sessionId: this.context.sessionId,
+                    sessionId: this.spaceID,
                     userName: userUser.name,
                     userIp: userUser.properties['remoteAddress']
                 }
