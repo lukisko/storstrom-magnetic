@@ -31,6 +31,7 @@ class Board {
         this.groupName = "PARTICIPANT";
         this.noGroupName = "NOT-PARTICIPANT";
         this.labelSpawnPlace = { x: 0, y: 1, z: -1 };
+        this.neededNumberOfLabels = 5;
         this.context = context;
         this.assets = assets;
         this.centerPosition = centerPosition;
@@ -38,6 +39,7 @@ class Board {
         this.totalOnBoard1 = 0;
         this.totalOnBoard2 = 0;
         this.participants = [];
+        this.participantsWithStar = [];
         this.participantMask = new MRE.GroupMask(context, [this.groupName]);
         this.notParticipandMask = new MRE.GroupMask(context, [this.noGroupName]);
         this.createIt();
@@ -103,9 +105,12 @@ class Board {
             this.createLabel2("wow", { x: 0, y: 3, z: -1 });
             //console.log(value.userId);
         });
-        //this.context.rpc.receive("test", newGuid());
-        //const some =
-        //const ws = new WebSocket("aha","localhost:8864");
+        if (this.context.sessionId.startsWith('@')) {
+            if (this.context.sessionId[2] === '@' || this.context.sessionId[3] === '@') {
+                let arrOfSession = this.context.sessionId.split('@');
+                this.neededNumberOfLabels = parseInt(arrOfSession[1]);
+            }
+        }
     }
     createLabel2(name, position, height = 0.1) {
         const label = MRE.Actor.CreatePrimitive(this.assets, {
@@ -163,7 +168,7 @@ class Board {
                 });
                 label.tag = "counted1";
                 this.totalOnBoard1++;
-                if (this.totalOnBoard1 >= 2) {
+                if (this.totalOnBoard1 >= this.neededNumberOfLabels) {
                     this.sendToServer(this.participants);
                 }
             }
@@ -383,6 +388,10 @@ class Board {
             }
         }
         users.map((user) => {
+            if (this.participantsWithStar.includes(user)) {
+                return;
+            }
+            //console.log("send to server");
             const userUser = this.context.user(user);
             //console.log(userUser.context,userUser.internal,userUser.properties);
             request_1.default.post('https://storstrom-server.herokuapp.com/add', {
@@ -398,6 +407,7 @@ class Board {
                 }
                 //console.log(res.body);
             });
+            this.participantsWithStar.push(user);
         });
     }
 }

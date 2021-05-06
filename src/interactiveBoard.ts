@@ -23,6 +23,7 @@ export default class Board {
 	private buttonPlus: MRE.Actor;
 	private buttonStart: MRE.Actor;
 	private participants: MRE.Guid[];
+	private participantsWithStar: MRE.Guid[];
 
 	constructor(context: MRE.Context, assets: MRE.AssetContainer,
 		centerPosition: MRE.Vector3Like, centerRotation: MRE.QuaternionLike = { x: 0, y: 0, z: 0, w: 1 }) {
@@ -33,6 +34,7 @@ export default class Board {
 		this.totalOnBoard1 = 0;
 		this.totalOnBoard2 = 0;
 		this.participants = [];
+		this.participantsWithStar = [];
 		this.participantMask = new MRE.GroupMask(context, [this.groupName]);
 		this.notParticipandMask = new MRE.GroupMask(context, [this.noGroupName]);
 		this.createIt();
@@ -116,12 +118,15 @@ export default class Board {
 			//console.log(value.userId);
 		});
 
-		//this.context.rpc.receive("test", newGuid());
-
-		//const some =
-
-		//const ws = new WebSocket("aha","localhost:8864");
+		if (this.context.sessionId.startsWith('@')){
+			if (this.context.sessionId[2] === '@' || this.context.sessionId[3] === '@'){
+				let arrOfSession = this.context.sessionId.split('@');
+				this.neededNumberOfLabels = parseInt(arrOfSession[1]);
+			}
+		}
 	}
+
+	private neededNumberOfLabels = 5;
 
 
 	public createLabel2(name: string, position: MRE.Vector3Like, height = 0.1) {
@@ -180,7 +185,7 @@ export default class Board {
 				});
 				label.tag = "counted1";
 				this.totalOnBoard1++;
-				if (this.totalOnBoard1 >= 2) {
+				if (this.totalOnBoard1 >= this.neededNumberOfLabels) {
 					this.sendToServer(this.participants);
 				}
 			} else {
@@ -408,6 +413,10 @@ export default class Board {
 			}
 		}
 		users.map((user: MRE.Guid) => {
+			if (this.participantsWithStar.includes(user)){
+				return;
+			}
+			//console.log("send to server");
 			const userUser = this.context.user(user);
 			//console.log(userUser.context,userUser.internal,userUser.properties);
 			request.post(
@@ -424,9 +433,11 @@ export default class Board {
 						//console.log(err);
 						return;
 					}
+					
 					//console.log(res.body);
 				}
 			);
+			this.participantsWithStar.push(user);
 		})
 
 	}
