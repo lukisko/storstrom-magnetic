@@ -95,10 +95,10 @@ export default class Board {
 			}
 		});
 
-		this.createLabel2("angry", this.labelSpawnPlace);
-		this.createLabel2("mad", this.labelSpawnPlace);
+		//this.createLabel2("angry", this.labelSpawnPlace);
+		//this.createLabel2("mad", this.labelSpawnPlace);
 		//this.createLabel2("good", this.labelSpawnPlace);
-		this.createLabel2("polite", this.labelSpawnPlace);
+		//this.createLabel2("polite", this.labelSpawnPlace);
 		//this.createLabel2("funny", this.labelSpawnPlace);
 		//this.createLabel2("up\nmiddle\ndown", this.labelSpawnPlace);
 		this.spawnLabel({ x: 5.2, y: 0.85, z: 0 });

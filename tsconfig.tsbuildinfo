@@ -1202,7 +1202,7 @@
         "affectsGlobalScope": false
       },
       "./src/interactiveBoard.ts": {
-        "version": "0141a1c4934402fdc705342e02ad1f9c5c836e65d77bf3b1c0cf57f4030afdac",
+        "version": "984ad005b9a60afab3d3ed2bf43a759eac964cdad59a2c2d358e71e49e8c579e",
         "signature": "7e2915ee955738a4ab75a953aea4332e746579d19b2348a27c1fbd899a1671f4",
         "affectsGlobalScope": false
       },
@@ -1257,7 +1257,7 @@
         "affectsGlobalScope": false
       },
       "./src/server.ts": {
-        "version": "355f5fa0259b569594663a21e3fb249f743b7b6ab43d0564df94818d97133e86",
+        "version": "1f3662932ada2b27924149f97701edba7c5d729b2fcb860819f1110468988948",
         "signature": "1bdaab87b793f49e745a6a1700bd74197b0a088d4e90ddc6f5bcb1a227fe826b",
         "affectsGlobalScope": false
       },

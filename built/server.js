@@ -54,7 +54,8 @@ dotenv_1.default.config();
 function runApp() {
     // Start listening for connections, and serve static files.
     const server = new MRE.WebHost({
-        baseDir: path_1.resolve(__dirname, '../public')
+        baseDir: path_1.resolve(__dirname, '../public'),
+        port: 3092
     });
     // Handle new application sessions
     server.adapter.onConnection(context => new app_1.default(context));
