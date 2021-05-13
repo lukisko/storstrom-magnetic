@@ -34,7 +34,7 @@ dotenv.config();
 // we detect that the code is running in a debuggable environment. If so, a
 // small delay is introduced allowing time for the debugger to attach before
 // the server starts accepting connections.
-function runApp() {
+function runApp() { //something is changed
 	// Start listening for connections, and serve static files.
 	const server = new MRE.WebHost({
 		baseDir: resolvePath(__dirname, '../public')
