@@ -1202,7 +1202,7 @@
         "affectsGlobalScope": false
       },
       "./src/interactiveBoard.ts": {
-        "version": "4bcfc671a831ed9a29ff3456c29b22991023351f9714040499c3331884f2ce3f",
+        "version": "7fee5ab4e1312431751c09dad6b683512ce52b5d112ce51c598e68af93f7d26e",
         "signature": "7e2915ee955738a4ab75a953aea4332e746579d19b2348a27c1fbd899a1671f4",
         "affectsGlobalScope": false
       },
@@ -1289,6 +1289,8 @@
       "strictNullChecks": false,
       "moduleResolution": 2,
       "esModuleInterop": true,
+      "watch": true,
+      "preserveWatchOutput": true,
       "configFilePath": "./tsconfig.json"
     },
     "referencedMap": {

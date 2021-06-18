@@ -88,8 +88,8 @@ export default class Board {
 				collider: {
 					geometry: {
 						shape: MRE.ColliderType.Box,
-						size: { x: 3, y: 2, z: 0.001 },
-						center: { x: -0.3, y: 0, z: 0 }
+						size: { x: 3.4, y: 2, z: 0.001 },
+						center: { x: 0, y: 0, z: 0 }
 					},
 					layer: MRE.CollisionLayer.Navigation
 				}
@@ -104,20 +104,10 @@ export default class Board {
 		//this.createLabel2("up\nmiddle\ndown", this.labelSpawnPlace);
 		this.spawnLabel({ x: 5.2, y: 0.85, z: 0 });
 
-		this.startAssignmentButton({ x: 0, y: 1, z: -2 });
+		this.startAssignmentButton({ x: 5.2, y: 1.35, z: 0 });
 
 		//this.door = new openingDoor(this.context, this.assets, { x: 5.828, y: 0, z: -6.24 });
 		//this.door.openDoor();
-
-		//RCP calls
-
-		this.context.rpc.on("point", (value) => {
-			//console.log("sessionID: "+this.context.sessionId);
-			//console.log("userID: ",value.userId);
-
-			this.createLabel2("wow", { x: 0, y: 3, z: -1 });
-			//console.log(value.userId);
-		});
 
 		if (this.context.sessionId.startsWith('@')){
 			if (this.context.sessionId[2] === '@' || this.context.sessionId[3] === '@'){
@@ -160,17 +150,9 @@ export default class Board {
 			}
 		})
 		label.onGrab("end", (user) => {
-			//let falsy = false;
-			//this.context.receiveRPC({
-			//	type:'engine2app-rpc',
-			//	procName:'point',
-			//	args:[]
-			//});
-			//this.context.rpc.receive("point", user.id);
-			//console.log(label.transform.app.position.y);
 			if (label.transform.app.position.y < 3.36 && label.transform.app.position.y > 0.86 &&
 				label.transform.app.position.x > -0.07 && label.transform.app.position.x < 3.9 &&
-				label.transform.app.position.z > -0.8 && label.transform.app.position.z < 0.15 &&
+				label.transform.app.position.z > -0.8 && label.transform.app.position.z < 0.55 &&
 				this.participants.includes(user.id)) {
 				label.enableRigidBody({ isKinematic: true });
 				MRE.Animation.AnimateTo(this.context, label, {
@@ -236,7 +218,7 @@ export default class Board {
 				},
 			}
 		});
-		this.buttonPlus.collider.layer = MRE.CollisionLayer.Default;
+		this.buttonPlus.collider.layer = MRE.CollisionLayer.Navigation;
 		MRE.Actor.Create(this.context, {
 			actor: {
 				parentId: this.buttonPlus.id,
@@ -263,10 +245,6 @@ export default class Board {
 
 		addButton.onClick((user: MRE.User) => {
 			//console.log(this.context.rpcChannels);
-			this.context.rpc.send({
-				procName: "point",
-				userId: user.id
-			});
 			this.addButtonPrompt(user);
 		});
 	}
@@ -339,7 +317,7 @@ export default class Board {
 				transform: { app: { position: position } },
 			}
 		});
-		this.buttonStart.collider.layer = MRE.CollisionLayer.Default;
+		this.buttonStart.collider.layer = MRE.CollisionLayer.Navigation;
 
 		MRE.Actor.Create(this.context, {
 			actor: {
