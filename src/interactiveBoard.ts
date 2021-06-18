@@ -55,7 +55,7 @@ export default class Board {
 		const greenMaterial = this.assets.createMaterial("red", {
 			color: { r: 0.1, g: 0.1, b: 0.1, a: 1 },
 		});
-		const boardPrefab = await this.assets.loadGltf("board.glb", "mesh");
+		const boardPrefab = await this.assets.loadGltf("wordboard_mdl_01.gltf", "mesh");
 		const blackBoard = MRE.Actor.CreateFromPrefab(this.context, {
 			firstPrefabFrom: boardPrefab,
 			//addCollider: true,
