@@ -1202,7 +1202,7 @@
         "affectsGlobalScope": false
       },
       "./src/interactiveBoard.ts": {
-        "version": "7fee5ab4e1312431751c09dad6b683512ce52b5d112ce51c598e68af93f7d26e",
+        "version": "d49e348452a8cc5ec6d1af7588de5ce889a179c720dad5e34c0dd9b18dcf9ec6",
         "signature": "7e2915ee955738a4ab75a953aea4332e746579d19b2348a27c1fbd899a1671f4",
         "affectsGlobalScope": false
       },

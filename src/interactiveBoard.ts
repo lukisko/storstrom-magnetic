@@ -102,9 +102,9 @@ export default class Board {
 		//this.createLabel2("polite", this.labelSpawnPlace);
 		//this.createLabel2("funny", this.labelSpawnPlace);
 		//this.createLabel2("up\nmiddle\ndown", this.labelSpawnPlace);
-		this.spawnLabel({ x: 5.2, y: 0.85, z: 0 });
+		this.spawnLabel({ x: 5.0, y: 0.85, z: 0 });
 
-		this.startAssignmentButton({ x: 5.2, y: 1.35, z: 0 });
+		this.startAssignmentButton({ x: 5.0, y: 1.35, z: 0 });
 
 		//this.door = new openingDoor(this.context, this.assets, { x: 5.828, y: 0, z: -6.24 });
 		//this.door.openDoor();
@@ -309,7 +309,7 @@ export default class Board {
 		this.buttonStart = MRE.Actor.CreatePrimitive(this.assets, {
 			definition: {
 				shape: MRE.PrimitiveShape.Box,
-				dimensions: { x: 1, y: 0.4, z: 0.02 }
+				dimensions: { x: 0.8, y: 0.4, z: 0.06 }
 			},
 			addCollider: true,
 			actor: {
@@ -382,8 +382,6 @@ export default class Board {
 	}
 
 	private sendToServer(users: MRE.Guid[]) {
-		//TODO
-		//console.log(users);
 		if (!this.spaceID){
 			try {
 				this.spaceID = this.context.users[0].properties['altspacevr-space-id'];
