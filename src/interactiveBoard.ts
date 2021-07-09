@@ -290,7 +290,7 @@ export default class Board {
 		const addButton = this.buttonPlus.setBehavior(MRE.ButtonBehavior);
 
 		addButton.onClick((user: MRE.User) => {
-			user.prompt("Please enter your word.", true)
+			user.prompt("Enter word.", true)
 				.then((value) => {
 					if (value.submitted) {
 						if (value.text.length < lettersForRow) { //I need to check if the input will fit into the label
